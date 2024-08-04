@@ -7,7 +7,7 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import { v4 as uuid } from 'uuid';
 import { corsOptions } from './constants/config.js';
-import { CHAT_JOINED, CHAT_LEAVED, NEW_MESSAGE, NEW_MESSAGE_ALERT, ONLINE_USERS, START_TYPING, STOP_TYPING } from './constants/events.js';
+import { CHAT_JOINED, CHAT_LEAVED, NEW_MESSAGE, NEW_MESSAGE_ALERT, ONLINE_USERS, START_TYPING, STOP_TYPING ,CLIENT_URL} from './constants/events.js';
 import { getSockets } from './lib/helper.js';
 import { socketAuthenticator } from './middlewares/auth.js';
 import { errorMiddleware } from './middlewares/error.js';
@@ -40,7 +40,15 @@ cloudinary.config({
 const app=express();
 const server=createServer(app);
 const io=new Server(server, {
-  cors: corsOptions,
+  cors: {
+        origin: [
+            "http://localhost:5173",
+            "http://localhost:4173",
+            process.env.CLIENT_URL,
+        ],
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        credentials: true,
+    },
 });
 
 app.set("io",io);
