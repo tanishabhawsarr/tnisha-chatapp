@@ -1,14 +1,14 @@
 const corsOptions={
-       origin: [
+      origin: [
         "http://localhost:5173",
         "http://localhost:4173",
         process.env.CLIENT_URL,
-       "https://tnisha-chatapp-frontend.vercel.app/",
+        "https://tnisha-chatapp-frontend.vercel.app"  // Add your frontend URL here
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
-}
+};
 
 const LETSTALK_TOKEN="letstalk-token"
 
